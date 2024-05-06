@@ -1,0 +1,185 @@
+<html>
+<head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+crossorigin="anonymous">
+     <title>Family activities</title>
+     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Water_sports_composite.jpg/320px-Water_sports_composite.jpg" alt="Water activities">
+</head>
+     <body>
+        <h1>Family activities</h1>
+        <div><button id="button-showCreate" onclick="showCreate()">Create an activity</button><br/><br/></div>
+        <div>
+           <table class="table" border="1" id = "activityTable" style = "background-color: pink; border-color: black">
+               <tr>
+                   <th>id</th>
+                   <th>Category</th>
+                   <th>Name</th>
+                   <th>Duration</th>
+                   <th>Update</th>
+                   <th>Delete</th>
+               </tr> 
+               <tr id="1">
+                   <td>1</td>
+                   <td>Health</td>
+                   <td>Swimming</td>
+                   <td>30</td>
+                   <td><button onclick="showUpdate(this)">Update</button></td>
+                   <td><button onclick="doDelete(this)">Delete</button></td>
+               </tr>               
+           </table>
+        </br>
+        </div>
+        <div id="createUpdateForm" style="display:none">
+        <!-- spans are like divs but do not go onto a new line -->
+        <h2>
+           <span id="createLabel">Create a</span>
+           <span id="updateLabel">Update this</span> Activity
+        </h2>
+           id <input type="text" name="id"><br/>
+           Category <input type="text" name="category"><br/>
+           Name <input type="text" name="name"><br/>
+           Duration <input type="number" name="duration"><br/>
+          
+           <span><button id="button-doCreate" onclick="doCreate()">Create</button></span>
+ 		<span><button id="button-doUpdate" onclick="doUpdate()">Update</button></span>
+                <!-- "display:none" will make it hidden-->
+        </div>
+
+
+     </body>
+     <script>
+        //console.log("hello world")
+        function showCreate(){
+            document.getElementById("createUpdateForm").style.display = "block"
+            
+            document.getElementById("button-doCreate").style.display = "block"
+            document.getElementById("button-doUpdate").style.display = "none"
+            document.getElementById("createLabel").style.display = "inline"
+            document.getElementById("updateLabel").style.display = "none"
+
+            document.getElementById("button-showCreate").style.display = "none"
+            document.getElementById("activityTable").style.display = "none"
+            
+        }
+        function showUpdate(buttonElement){
+            document.getElementById("createUpdateForm").style.display = "block"
+           
+            document.getElementById("button-doCreate").style.display = "none"
+            document.getElementById("button-doUpdate").style.display = "block"
+            document.getElementById("createLabel").style.display = "none"
+            document.getElementById("updateLabel").style.display = "inline"
+
+            document.getElementById("button-showCreate").style.display = "none"
+            document.getElementById("activityTable").style.display = "none"
+
+            rowElement= buttonElement.parentNode.parentNode
+            book = getActivityFromRow(rowElement)
+            //console.log("updating")
+            //console.log(activity)
+            populateFormWithActivity(activity)
+            
+        }
+        function showViewall(){
+            document.getElementById("createUpdateForm").style.display = "none"
+           
+            document.getElementById("button-showCreate").style.display = "block"
+            document.getElementById("activityTable").style.display = "block"
+            
+        }
+        function clearForm(){
+            var form = document.getElementById('createUpdateForm')
+
+            form.querySelector('input[name="id"]').disabled = false
+            form.querySelector('input[name="id"]').value  =''
+            form.querySelector('input[name="category"]').value=''
+            form.querySelector('input[name="name"]').value=''
+            form.querySelector('input[name="duration"]').value=''
+        }
+        
+        function getActivityFromForm(){
+            var form = document.getElementById('createUpdateForm')
+
+       	    var activity = {}
+        	activity.id = form.querySelector('input[name="id"]').value
+        	activity.category = form.querySelector('input[name="category"]').value
+        	activity.name = form.querySelector('input[name="name"]').value
+        	activity.duration = form.querySelector('input[name="duration"]').value
+        	//console.log(JSON.stringify(activity))
+            return activity
+        }
+        function populateFormWithActivity(activity){
+       		var form = document.getElementById('createUpdateForm')
+        	form.querySelector('input[name="id"]').disabled = true
+       		form.querySelector('input[name="id"]').value  = activity.id
+       		form.querySelector('input[name="category"]').value= activity.category
+        	form.querySelector('input[name="name"]').value= activity.name
+        	form.querySelector('input[name="duration"]').value= activity.duration
+    }
+
+
+        function addActivityToTable(activity){
+            var tableElement = document.getElementById('activityTable')
+            var rowElement = tableElement.insertRow(-1)
+            
+            rowElement.setAttribute('id',activity.id)
+            
+            var cell1 = rowElement.insertCell(0);
+            cell1.innerHTML = activity.id
+            var cell2 = rowElement.insertCell(1);
+            cell2.innerHTML = activity.category
+            var cell3 = rowElement.insertCell(2);
+            cell3.innerHTML = activity.name
+            var cell4 = rowElement.insertCell(3);
+            cell4.innerHTML = activity.duration
+            var cell5 = rowElement.insertCell(4);
+            cell5.innerHTML = '<button onclick="showUpdate(this)">Update</button>'
+            var cell6 = rowElement.insertCell(5);
+            cell6.innerHTML = '<button onclick=doDelete(this)>Delete</button>'
+
+        }
+        function getActivityFromRow(rowElement){
+            var activity ={}
+            activity.id  = rowElement.cells[0].firstChild.textContent
+            activity.category = rowElement.cells[1].firstChild.textContent
+            activity.name = rowElement.cells[2].firstChild.textContent
+            activity.duration = rowElement.cells[3].firstChild.textContent
+            return activity
+        }
+        function setActivityInRow(rowElement, activity){
+            rowElement.cells[0].firstChild.textContent= activity.id 
+            rowElement.cells[1].firstChild.textContent= activity.category 
+            rowElement.cells[2].firstChild.textContent= activity.name
+            rowElement.cells[3].firstChild.textContent= activity.duration
+    }
+
+        function doCreate(){
+            console.log("creating an activity")
+            activity = getActivityFromForm()
+            console.log(activity)
+            addActivityToTable(activity)
+            showViewall()
+            clearForm()
+        }
+        function doUpdate(){
+            activity = getActivityFromForm()
+            //console.log(activity)
+            var rowElement = document.getElementById(activity.id)
+            setActivityInRow(rowElement, activity)
+
+            showViewall()
+            clearForm()
+        }
+        function doDelete(buttonElement){
+            console.log("in delete")
+            var tableElement = document.getElementById('activityTable')
+            var index = buttonElement.parentNode.parentNode.rowIndex;
+            tableElement.deleteRow(index);
+
+        }
+
+        
+    </script>
+
+</html>
