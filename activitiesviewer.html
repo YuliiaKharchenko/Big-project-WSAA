@@ -4,14 +4,26 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
 integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
 crossorigin="anonymous">
+    <style>
+        .btn-custom {
+            background-color: purple; 
+            color: white; 
+            font-weight: bold; 
+        }
+    </style>
+
      <title>activities</title>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Water_sports_composite.jpg/320px-Water_sports_composite.jpg" alt="Water activities">
+     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bergtocht_in_de_omgeving_van_bergdorp_S-charl_17-09-2019._%28actm.%29_01.jpg/320px-Bergtocht_in_de_omgeving_van_bergdorp_S-charl_17-09-2019._%28actm.%29_01.jpg" alt="kayaking">
+     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Mathieu_Burgaudeau_during_time_trial_training_of_Itzulia_Basque_Country_race_-_stage_1.jpg/320px-Mathieu_Burgaudeau_during_time_trial_training_of_Itzulia_Basque_Country_race_-_stage_1.jpg" alt="cicling">
+     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Inzell_2017_Kat_A1_ZBYSZEK_Kunert_-9513.jpg/320px-Inzell_2017_Kat_A1_ZBYSZEK_Kunert_-9513.jpg" alt="winter activities">
+     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Parapente_-_166.jpg/320px-Parapente_-_166.jpg"alt="air activities">
 </head>
      <body>
         <h1>Family activities</h1>
-        <div><button id="button-showCreate" onclick="showCreate()">Create an activity</button><br/><br/></div>
+        <div><button class="btn btn-custom" id="button-showCreate" onclick="showCreate()">Create an activity</button><br/><br/></div>
         <div>
            <table class="table" border="1" id = "activityTable" style = "background-color: pink; border-color: black">
                <tr>
@@ -38,8 +50,8 @@ crossorigin="anonymous">
            Name <input type="text" name="name"><br/>
            Duration <input type="number" name="duration"><br/>
           
-           <span><button id="button-doCreate" onclick="doCreate()">Create</button></span>
- 		   <span><button id="button-doUpdate" onclick="doUpdate()">Update</button></span>
+           <span><button class="btn btn-custom" id="button-doCreate" onclick="doCreate()">Create</button></span>
+ 		   <span><button class="btn btn-custom" id="button-doUpdate" onclick="doUpdate()">Update</button></span>
                 <!-- "display:none" will make it hidden-->
         </div>
 
@@ -132,9 +144,9 @@ crossorigin="anonymous">
             var cell4 = rowElement.insertCell(3);
             cell4.innerHTML = activity.duration
             var cell5 = rowElement.insertCell(4);
-            cell5.innerHTML = '<button onclick="showUpdate(this)">Update</button>'
+            cell5.innerHTML = '<button class="btn btn-custom" onclick="showUpdate(this)">Update</button>'
             var cell6 = rowElement.insertCell(5);
-            cell6.innerHTML = '<button onclick=doDelete(this)>Delete</button>'
+            cell6.innerHTML = '<button class="btn btn-custom" onclick=doDelete(this)>Delete</button>'
 
         }
 
