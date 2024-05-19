@@ -9,6 +9,8 @@ This project is a simple web application designed to manage family activities. I
 
 The project can be used as a template for creating similar web applications that require a backend database for storing and managing data. It demonstrates the integration of Flask with MySQL, handling HTTP requests, and dynamically updating the web interface using JavaScript and jQuery.
 
+*** 
+
 ## Get Started
 
 To set up and run this project, follow these steps:
@@ -63,6 +65,7 @@ python server.py
 
 * Open your web browser and go to http://localhost:5000 to access the application (open activitiesviewer.html). 
 
+*** 
 
 ## Additionally
 
@@ -94,6 +97,8 @@ The style of the buttons has been set:
         }
     </style>
 ```
+
+*** 
 
 ## Author
 
