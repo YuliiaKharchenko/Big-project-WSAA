@@ -16,7 +16,7 @@ def index():
 
 @app.route('/activities')
 def get_all():
-    print("in getall")
+    # print("in getall")
     results = activitiesDAO.get_all()
     return jsonify(results)
 
@@ -35,7 +35,7 @@ def create():
     
     if not request.json:
         abort(400)
-    # other checking 
+     
     activities = {
         "category": request.json["category"],
         "name": request.json["name"],
